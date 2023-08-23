@@ -23,6 +23,16 @@ class RoutingController extends AbstractController
 
     public function route(string $origin, string $destination): JsonResponse
     {
+        $origin = strtoupper($origin); // Convert $origin to uppercase
+        $destination = strtoupper($destination); // Convert $destination to uppercase
+        $isValidOrigin = preg_match('/^[A-Z]{3}$/', $origin) === 1;
+        $isValidDestination = preg_match('/^[A-Z]{3}$/', $destination) === 1;
+
+        // Check if both $origin and $destination are valid
+        if (!$isValidOrigin || !$isValidDestination) {
+            // Handle validation errors, e.g., return an error response
+            return new JsonResponse(['error' => 'Invalid origin or destination, country name should be cca3'], 400);
+        }
         // Fetch country data using the CountryService
         $countries = $this->countryService->fetchCountriesData();
 

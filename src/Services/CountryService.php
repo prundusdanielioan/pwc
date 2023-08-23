@@ -37,7 +37,7 @@ class CountryService
         foreach ($data as $country) {
             // Ensure the necessary data fields exist in the fetched data
             if (isset($country['cca3']) && isset($country['borders'])) {
-                $countries[$country['cca3']] = [
+                $countries[strtoupper($country['cca3'])] = [
                     'borders' => $country['borders'],
                 ];
             }
