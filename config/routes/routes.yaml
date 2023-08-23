@@ -1,0 +1,3 @@
+app_routing:
+  path: /routing/{origin}/{destination}
+  controller: App\Controller\RoutingController::route
